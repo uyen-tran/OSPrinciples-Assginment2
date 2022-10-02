@@ -13,23 +13,36 @@ The  goal  of  this assignment  is  to  practice  some  system  calls  and  proc
 (Note: use connection-oriented communication (socket programming using TCP))  
 
 You will write a server and a client program:  
+
 **Server:** The server will run on the remote machine.  
+
 • It will bind to a TCP socket at a port known to the client and waits for a Connection Request from Client. 
+
 • When it receives a connection, it forks a child process to handle this connection. The Server must handle multiple clients at a time. 
+
 • The parent process loops back to wait for more connections. 
+
 • The  child  process  executes  the  given  shell  command  (received  from  the  client), returning  all  stdout  and  stderr  to  the  client.  (Hence,  the  server  will  not  display the output of the executed command) 
+
 • The server can assume that the shell command does not use stdin. 
   
-**Client:** The client will run on the local machine.  • From the command line, the user will specify the host (where the server resides) 
+**Client:** The client will run on the local machine.  
+• From the command line, the user will specify the host (where the server resides) 
 and the command to be executed. 
+
 • The client will then connect to the server via a TCP socket. 
+
 • The client sends the command to the server. 
+
 • The client will display any output received from the server to the stdout. 
+
 • After displaying the output, the client waits for next command from the user. 
+
 • The client will not close/exit until the user enters “quit” command. 
 
 **Creating a Child Process**
 At Server side, for each incoming client, a child process is forked which executes the command received from the client.  
+
 The separate child process is created using the fork() system call, and the user’s command is executed using one of the system calls in the exec() family.  
 
 Note:(The example below is one way of doing this, you are welcome to do it your own way!)  
