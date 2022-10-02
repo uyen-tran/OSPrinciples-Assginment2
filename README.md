@@ -27,6 +27,7 @@ You will write a server and a client program:
 • The server can assume that the shell command does not use stdin. 
   
 **Client:** The client will run on the local machine.  
+
 • From the command line, the user will specify the host (where the server resides) 
 and the command to be executed. 
 
@@ -41,6 +42,7 @@ and the command to be executed.
 • The client will not close/exit until the user enters “quit” command. 
 
 **Creating a Child Process**
+
 At Server side, for each incoming client, a child process is forked which executes the command received from the client.  
 
 The separate child process is created using the fork() system call, and the user’s command is executed using one of the system calls in the exec() family.  
@@ -49,10 +51,12 @@ Note:(The example below is one way of doing this, you are welcome to do it your 
 
 This will require parsing the command into separate tokens and storing the tokens in an array of character strings, say args. For example, if the command entered at the prompt is:  
 ps -ael  
+
 Te values stored in the args array are:  
 args[0] = "ps"  
 args[1] = "-ael"  
 args[2] = NULL  
+
 This args array will be passed to the execvp() function, which has the following prototype:  
 execvp(char *command, char *params[]);  
 
